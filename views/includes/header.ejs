@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>Welcome</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+<header>
+<nav role="navigation" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark ">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">BooksBaZaar</a>
+</div>
+<div class="navbar-collapse collapse justify-content-between" id="navbarCollapse">
+  <ul class="navbar navbar-nav mr-auto">
+  </ul>
+  <% if (!user) { %>
+  <form action="/userlogin" method="POST" class="mb-0 pt-2 pt-md-0">
+    <div class="row align-items-center">
+      <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
+        <input name="username" class="form-control form-control-sm input-dark" type="text" placeholder="Username" autocomplete="off">
+      </div>
+      <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
+        <input name="password" class="form-control form-control-sm input-dark" type="password" placeholder="Password">
+      </div>
+      <div class="col-md-auto">
+        <button class="btn btn-primary btn-sm">Sign In</button>
+      </div>
+    </div>
+  </form>
+  <% } else { %>
+  <ul class="nav navbar-nav  navbar-right">
+    <li class="nav-item active">
+      <a class="nav-link" href="/books">Books <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/sell">Sell</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Profile</a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="/profile"><span class="glyphicon glyphicon-user"></span>Profile</a>
+        <a class="dropdown-item" href="/activity">Activity</a>
+        <a class="dropdown-item" href="/logout">LogOut</a>
+      </div>
+    </li>
+    </ul>
+    <% } %>
+  </div>
+  </div>
+</nav>
+</header>
