@@ -5,6 +5,7 @@ const flash =require("connect-flash")
 const markdown=require("marked")
 const sanitizeHtml=require("sanitize-html")
 const router =require('./router')
+const cookieParser=require('cookie-parser');
 const app=express()
 let sessionOptions=session({
   secret: "Javascript is so cool",
@@ -15,6 +16,7 @@ let sessionOptions=session({
 })
 app.use(sessionOptions)
 app.use(flash())
+app.use(cookieParser())
 app.use(function(req,res,next){
 //   //make our markdown function available from ejs template
 
@@ -22,10 +24,17 @@ app.use(function(req,res,next){
 //     return sanitizeHtml(markdown(content),{allowedTags:['h1','h2'],allowedAtt
 //   :{}})
 //   }
-//   res.locals.errors=req.flash("errors")
-//   res.locals.success=req.flash("sucess")
+if (req.session.cart){
+  res.locals.countItems=req.session.cart.totalItems;
+}
+else{
+  res.locals.countItems=0
+}
+  res.locals.errors=req.flash("errors")
+  res.locals.success=req.flash("sucess")
   if(req.session.user){
    req.visitorId=req.session.user._id
+   req.token=req.session.user.token
   }
   else{
     req.visitorId =0

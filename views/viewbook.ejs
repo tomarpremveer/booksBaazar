@@ -1,0 +1,45 @@
+<%- include ("includes/header") %>
+<div class="container">
+  <%-include("includes/flash") %>
+    <main role="main" class="">
+      <div class="album py-5 bg-light">
+        <div class="row">
+            <div class="col-md-5">
+              <div class="card mb-3 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="/../../<%=item.imageUrl %>" data-holder-rendered="true">
+                <div class="card-body">
+                  <p class="card-text"><%= item.name %></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">                      <button type="button" class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                    </div>
+                    <small class="text-muted">Rs <%= item.price %></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="text-center">
+              <h4>Information about Book</h4>
+            </div>
+            <div class="table-responsive">
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td>Author:</td>
+                  <td><%= item.author %></td>
+                </tr>
+                <tr>
+                  <td>Owner:</td>
+                  <td><a href="/view/profile/<%= item.ownerId%>">Owner</a></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            </div>
+          </div>
+        </div>
+    </main>
+    <hr class="mb-5">
+    <h3>Recommeded Books</h3>
+    </div>
+<%- include("includes/footer") %>

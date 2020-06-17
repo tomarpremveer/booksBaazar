@@ -1,0 +1,32 @@
+<%- include ("includes/header") %>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Post an Ad</h2>
+      </div>
+    <div class="d-flex  justify-content-center border border-dark">
+        <form action="" class="">
+            <div class="form-group">
+                <label for="name">Book Name:</label>
+                <input type="text" name="name" id="name" placeholder="Enter Book Name" class="form-control form-control-lg" required>
+            </div>
+
+            <div class="form-group">
+                <label for="author">Author Name:</label>
+                <input type="text" placeholder="Enter Author Name" name="author" id="author" class="form-control form-control-lg" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Book Price:</label>
+                <input type="text" name="price" id="price" placeholder="Enter Book Price" class="form-control form-control-lg" required>
+            </div>
+            <div class="form-group">
+                <label for="file">Image</label>
+                <input type="file" class="form-control-file" id="file" aria-describedby="imageHelp" required>
+                <small id="imageHelp" class="form-text text-muted">Please upload a image in jpeg/jpg or webp format.</small>
+            </div>
+                  <button type="submit" class="btn btn-primary">Post</button>
+            
+        </form>
+    </div>
+</div>
+<%- include("includes/footer") %>

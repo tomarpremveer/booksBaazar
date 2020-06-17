@@ -1,5 +1,7 @@
+const jwt =require('jsonwebtoken')
 const userCollection=require('../db').db().collection('users')
 const bcrypt=require("bcryptjs")
+const validator=require("validator")
 let User =function(data){
   this.data=data
   this.errors=[]
@@ -35,19 +37,47 @@ User.prototype.validate=function(){
   resolve()
 })
 }
+User.prototype.sendToken= function(payload){
+  return new Promise((resolve,reject)=>{
+    jwt.sign({id:payload},'aprivatekey',{expiresIn:3600},(err,token)=>{
+      if (err)
+      reject(err);
+      else
+      resolve(token);
+  })
+})
+}
 User.prototype.login=function(){
   return new Promise((resolve,reject)=> {
     this.cleanUp()
     userCollection.findOne({username:this.data.username}).then((attemptedUser) => {
-      if(attemptedUser && bcrypt.compareSync(this.data.password,attemptedUser.password)) {       this.data=attemptedUser
-        resolve("Congrats")
-      }
-      else{
-        reject("Invalid username and password")
+      if(attemptedUser && bcrypt.compareSync(this.data.password,attemptedUser.password)) {       
+        this.data=attemptedUser
+       let permissions=userCollection.aggregate([
+        {
+          $match: {roleid:attemptedUser.roleid}
+        } ,
+        {
+           $lookup: {
+             from: "roles",
+             localField: "roleid",
+             foreignField: "roleid",
+             as: "permissions"
+           }
+         },
+         {
+           $project: {
+             permissions: 1
+           }
+         }
+       ]).toArray()
+         let token=this.sendToken(attemptedUser._id)
+        resolve(token)
       }
     }).catch(()=> reject("Error occured"))
   })
   }
+ 
   User.prototype.register= function (){
     return new Promise(async (resolve,reject) => {
   
@@ -66,5 +96,4 @@ User.prototype.login=function(){
     })
   }
   
-
 module.exports =User

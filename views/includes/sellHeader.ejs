@@ -33,15 +33,16 @@
   </form>
   <% } else { %>
   <ul class="nav navbar-nav  navbar-right">
-    <li class="nav-item active">
+    <li class="nav-item">
+      <a class="nav-link" href="/postad">Post Ad</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/checkout">Cart</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="/books">Books <span class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/checkout">Cart<span class="badge badge-primary" id="counrBadge"><%=countItems %></span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/sell">Sell</a>
-    </li>
+  
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= user.username %></a>
