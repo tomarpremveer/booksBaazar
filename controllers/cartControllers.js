@@ -4,18 +4,22 @@ exports.add=function(req,res){
     data={
       name:req.body.nameAuthor,
       price:req.body.price,
-      id:req.body.id
     }
     let cart=new Cart(req.session.cart?req.session.cart:{})
-    cart.addItem(data)
+    cart.addItem(req.body.id,data)
     req.session.cart=cart
     req.session.save()
+    res.send("success")
 }
 
 exports.delete = function(req,res){
-  delete req.session.cart.items[id]
+  let cart=new Cart(req.session.cart?req.session.cart:{})
+  let returnedItem=cart.removeItem(req.body.itemId)
+  req.session.cart=cart
+  req.session.save()
+  res.send(returnedItem)
 }
-exports.checkout=function(req,res){
-    res.render("checkout",{title:"CheckOut",cart:new Cart(req.session.cart)})
+exports.checkout=function(req,res,next){
+   res.render("checkout",{title:"CheckOut"})
   }
 

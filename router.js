@@ -13,7 +13,7 @@ router.post('/register',userControllers.register)
 //book routes
 
 router.get('/books',bookControllers.listBooks)
-router.get('/insert',userControllers.mustBeLoggedIn,bookControllers.insert)
+router.post('/insert',userControllers.mustBeLoggedIn,bookControllers.insert)
 router.get('/view/book/:id',bookControllers.viewBook)
 router.get('/orders',userControllers.mustBeLoggedIn,bookControllers.orders)
 router.get('/rentout',bookControllers.rentout)

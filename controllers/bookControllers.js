@@ -1,13 +1,13 @@
 const Book=require('../models/Book')
 exports.home = function(req,res){
-  Book.listAll().then((items)=>{
+  Book.listAll(0).then((items)=>{
    res.render("index",{title:"BooksBaZaar",items:items})
   }).catch((err)=>{
     res.render("index",{title:"BooksBaZaar"})
   })
 }
 exports.listBooks =function(req,res){
-  Book.listAll().then((items)=>{
+  Book.listAll(0).then((items)=>{
    res.render("bookList",{title:"List Books",items:items})
   }).catch((err)=>{
     res.render("bookList",{title:"List Books"})
@@ -23,7 +23,11 @@ exports.orders=function(req,res){
 }
 
 exports.sell=function(req,res){
-  res.render("sell",{title:"Sell"})
+  Book.listAll(req.visitorId).then((items)=>{
+    res.render("sell",{title:"Sell",items:items})
+  }).catch((err)=>{
+    console.log(err)
+  })
 }
 
 
@@ -41,17 +45,20 @@ exports.viewBook=function(req,res){
 
 exports.insert=function(req,res){
   data={
-    name:"Php professional",
-    price:"750",
-    author:"Rick",
-    imageUrl:"images/1.webp",
+    name:req.body.bookName,
+    price:req.body.price,
+    author:req.body.authorName,
+    imageUrl:req.body.imageName,
     postedDate:new Date()
   }
 let book=new Book(data,req.visitorId)
 book.insert().then((id)=>{
-  res.redirect(`/view/book/${id}`)
+  req.flash("success","Book inserted successfully")
+  req.session.save(function(){
+    res.redirect(`/view/book/${id}`)
+  })
 }).catch((err)=>{
-console.log(err)
+consol
 })
 }
 

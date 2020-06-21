@@ -1,4 +1,6 @@
 const express = require('express')
+const jwt=require('jsonwebtoken')
+const Cart=require('./models/Cart')
 const session = require("express-session")
 const mongoStore=require("connect-mongo")(session)
 const flash =require("connect-flash")
@@ -17,6 +19,7 @@ let sessionOptions=session({
 app.use(sessionOptions)
 app.use(flash())
 app.use(cookieParser())
+
 app.use(function(req,res,next){
 //   //make our markdown function available from ejs template
 
@@ -25,9 +28,11 @@ app.use(function(req,res,next){
 //   :{}})
 //   }
 if (req.session.cart){
+  cart=new Cart(req.session.cart)
   res.locals.countItems=req.session.cart.totalItems;
 }
 else{
+  cart=new Cart({})
   res.locals.countItems=0
 }
   res.locals.errors=req.flash("errors")
@@ -43,6 +48,16 @@ else{
   res.locals.user=req.session.user
   next()
 })
+// app.use(function(req,res,next){
+//   jwt.verify(req.token,'aprivatekey',(err,token)=>{
+//     if(err)
+//       req.flash("errors","You aren't allowed to access this url")
+//   else
+//   next()
+// })
+//  console.log("req"+req.originalUrl)
+// next()
+// })
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(express.static('public'))

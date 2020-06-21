@@ -15,7 +15,7 @@ Book.prototype.cleanUp=function(){
       imageUrl:this.data.imageUrl,
       postedDate:this.data.postedDate,
       hit:this.hit,
-      ownerId:this.ownerId,
+      ownerId:ObjectID(this.ownerId),
     }
   }
 
@@ -29,13 +29,22 @@ Book.prototype.insert=function(){
         })
     })
 }
-Book.listAll=function(){
+Book.listAll=function(userId){
     return new Promise(async (resolve,reject)=>{
+        if(userId==0){
         let items=await bookCollection.find().sort({"hit":-1}).toArray()
         if (items.length >0 )
         resolve(items)
         else
-        reject([])
+        resolve([])
+        }
+        else{
+            let items=await bookCollection.find({ownerId:ObjectID(userId)}).sort({"hit":-1}).toArray()
+        if (items.length >0 )
+        resolve(items)
+        else
+        resolve([])
+        }
     })
 }
 

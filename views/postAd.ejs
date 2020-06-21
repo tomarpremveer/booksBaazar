@@ -1,18 +1,19 @@
 <%- include ("includes/header") %>
+<%- include ("includes/flash") %>
 <div class="container">
     <div class="py-5 text-center">
         <h2>Post an Ad</h2>
       </div>
     <div class="d-flex  justify-content-center border border-dark">
-        <form action="" class="">
+        <form action="/insert" class="" method="POST">
             <div class="form-group">
-                <label for="name">Book Name:</label>
-                <input type="text" name="name" id="name" placeholder="Enter Book Name" class="form-control form-control-lg" required>
+                <label for="bookName">Book Name:</label>
+                <input type="text" name="bookName" id="bookName" placeholder="Enter Book Name" class="form-control form-control-lg" required>
             </div>
 
             <div class="form-group">
-                <label for="author">Author Name:</label>
-                <input type="text" placeholder="Enter Author Name" name="author" id="author" class="form-control form-control-lg" required>
+                <label for="authorName">Author Name:</label>
+                <input type="text" placeholder="Enter Author Name" name="authorName" id="authorName" class="form-control form-control-lg" required>
             </div>
 
             <div class="form-group">
@@ -21,8 +22,14 @@
             </div>
             <div class="form-group">
                 <label for="file">Image</label>
-                <input type="file" class="form-control-file" id="file" aria-describedby="imageHelp" required>
-                <small id="imageHelp" class="form-text text-muted">Please upload a image in jpeg/jpg or webp format.</small>
+                <select class="form-control" name="imageName" id="imageName" >
+                    <option value="images/1.webp">Image 1</option>
+                    <option value="images/2.webp">Image 2</option>
+                    <option value="images/3.webp">Image 3</option>
+                    <option value="images/4.webp">Image 4</option>
+                </select>
+                <!-- <input type="file" class="form-control-file" id="file" aria-describedby="imageHelp" required>
+                <small id="imageHelp" class="form-text text-muted">Please upload a image in jpeg/jpg or webp format.</small> -->
             </div>
                   <button type="submit" class="btn btn-primary">Post</button>
             
