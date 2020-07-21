@@ -5,7 +5,6 @@ const session = require("express-session")
 const mongoStore=require("connect-mongo")(session)
 const flash =require("connect-flash")
 const markdown=require("marked")
-const sanitizeHtml=require("sanitize-html")
 const router =require('./router')
 const cookieParser=require('cookie-parser');
 const app=express()
