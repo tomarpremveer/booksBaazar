@@ -1,4 +1,5 @@
 const bookCollection=require('../db').db().collection('books')
+const orderCollection=require('../db').db().collection('orders')
 const ObjectID =require("mongodb").ObjectID
 
 let Cart=function(cart){
@@ -25,5 +26,24 @@ Cart.prototype.removeItem=function(id){
     this.totalCost-=cost
     return temp
 }
-
+Cart.prototype.rent=  function(borrowerId,borrowerAddress){
+    return new Promise( async(resolve,reject)=>{
+    let bookArray=[];
+    for(let [key,value] of Object.entries(cart.items)){
+        bookArray.push({
+            bookId:ObjectID(key),
+            ownerId:ObjectID(value.ownerId),
+            borrowerId:ObjectID(borrowerId),
+            bookName:value.name,
+            status:borrowerAddress.rent,
+            borrowerAddress:borrowerAddress
+        })
+    }
+    orderCollection.insertMany(bookArray).then((data)=>{
+        resolve(data);
+    }).catch((err)=>{
+        reject(err);
+    });
+}) 
+}
 module.exports=Cart

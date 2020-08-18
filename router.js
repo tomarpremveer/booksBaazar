@@ -13,6 +13,7 @@ router.post('/register',userControllers.register)
 //book routes
 
 router.get('/books',bookControllers.listBooks)
+router.get('/filteredBooks/:filter',bookControllers.filteredBooks)
 router.post('/insert',userControllers.mustBeLoggedIn,bookControllers.insert)
 router.get('/view/book/:id',bookControllers.viewBook)
 router.get('/orders',userControllers.mustBeLoggedIn,bookControllers.orders)
@@ -24,4 +25,5 @@ router.get('/postad',bookControllers.postAd)
 router.post('/add/item',cartControllers.add)
 router.post('/delete/item',cartControllers.delete)
 router.get('/checkout',userControllers.mustBeLoggedIn,cartControllers.checkout)
+router.post('/carryCheckout',cartControllers.rent)
 module.exports =router

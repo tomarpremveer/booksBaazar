@@ -3,10 +3,12 @@ function addItem(e){
        let pelements=parentE.querySelectorAll("p")
         let idele=pelements[0].innerText
         let nameAuthor=pelements[1].innerText
+        let ownerId=pelements[2].innerText
         let price=parentE.querySelector("#price").innerText
         let data={
             id:idele,
             nameAuthor:nameAuthor,
+            ownerId:ownerId,
             price:Number(price.split(' ')[1])
         }
         const config={
@@ -59,4 +61,35 @@ function insertBook(e){
     let imageName=document.getElementById("imageName")
     let price=document.getElementById("price")
     alert("this function called")
+}
+
+function placeOrder(e){
+    let firstName=document.getElementById("firstName").value
+    let lastName=document.getElementById("lastName").value
+    let address=document.getElementById("address").value
+    let selectCountry=document.getElementById("country")
+    let country = selectCountry.options[selectCountry.selectedIndex].value;
+    let selectState=document.getElementById("state")
+    let state = selectState.options[selectState.selectedIndex].value;
+    let rent=document.getElementById("rent").checked
+    data={
+        firstName,
+        lastName,
+        address,
+        country,
+        state,
+        rent
+    }
+    const config={
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify(data)
+    }
+    fetch('/carryCheckout',config).then((result)=>{
+        console.log(result)
+    }).catch((err)=>{
+        console.log(err)
+    })
 }

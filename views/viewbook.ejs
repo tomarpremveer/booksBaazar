@@ -1,29 +1,46 @@
 <%- include ("includes/header") %>
 <div class="container">
   <%- include("includes/flash") %>
-    <main role="main" class="">
-      <div class="album py-5 bg-light">
-        <div class="row">
-            <div class="col-md-5">
-              <div class="card mb-3 box-shadow">
-                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="/../../<%=item.imageUrl %>" data-holder-rendered="true">
-                <div class="card-body" id="parentDiv">
-                  <p id="idele" hidden><%=item._id%></p>
-                  <p class="card-text"><%= item.name %> by <%=item.author %></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group"> 
-                    <button type="button" onclick="addItem(this)" class="btn btn-sm btn-outline-primary" id="cart-button">Add to Cart</button>
-                    </div>
-                    <small class="text-muted" id="price">Rs <%= item.price %></small>
-                  </div>
+  <main role="main" class="">
+    <div class="album py-5 bg-light">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card mb-3 box-shadow">
+            <img
+              class="card-img-top"
+              data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+              alt="Thumbnail [100%x225]"
+              style="height: 225px; width: 100%; display: block;"
+              src="/../../<%=item.imageUrl %>"
+              data-holder-rendered="true"
+            />
+            <div class="card-body" id="parentDiv">
+              <p id="idele" hidden><%=item._id%></p>
+              <p class="card-text"><%= item.name %> by <%=item.author %></p>
+              <p id="ownerId" hidden><%= item.ownerId %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    onclick="addItem(this)"
+                    class="btn btn-sm btn-outline-primary"
+                    id="cart-button"
+                  >
+                    Add to Cart
+                  </button>
                 </div>
+                <small class="text-muted" id="price"
+                  >Rs <%= item.price %></small
+                >
               </div>
             </div>
-            <div class="col-md-5">
-              <div class="text-center">
-              <h4>Information about Book</h4>
-            </div>
-            <div class="table-responsive">
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="text-center">
+            <h4>Information about Book</h4>
+          </div>
+          <div class="table-responsive">
             <table class="table table-sm">
               <tbody>
                 <tr>
@@ -36,13 +53,64 @@
                 </tr>
               </tbody>
             </table>
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <hr class="mb-5" />
+  <h3>Recommeded Books</h3>
+  <div class="album py-3 bg-light" id="recommedationArea">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card mb-3 box-shadow">
+          <img
+            class="card-img-top"
+            data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+            alt="Thumbnail [100%x225]"
+            style="height: 225px; width: 100%; display: block;"
+            src="/../../<%=item.imageUrl %>"
+            data-holder-rendered="true"
+          />
+          <div class="card-body" id="parentDiv">
+            <p id="idele" hidden><%=item._id%></p>
+            <p class="card-text"><%= item.name %> by <%=item.author %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button
+                  type="button"
+                  onclick="addItem(this)"
+                  class="btn btn-sm btn-outline-primary"
+                  id="cart-button"
+                >
+                  Add to Cart
+                </button>
+              </div>
+              <small class="text-muted" id="price">Rs <%= item.price %></small>
             </div>
           </div>
         </div>
-    </main>
-    <hr class="mb-5">
-    <h3>Recommeded Books</h3>
+      </div>
     </div>
-    <script src="./../../javascripts/index.js"></script>
-<%- include("includes/footer") %>
+    <!-- <script>
+      window.onload = () => {
+        let paragraphTag = document.querySelector("#recommedationArea");
+        // alert(paragraphTag.innerHTML);
+        let arr = [1, 23, 4, 5];
+        let pTags = arr.map((n) => {
+          // let pTag = document.createElement("p");
+          // let textNode = document.createTextNode(`${n}`);
+          // pTag.appendChild(textNode);
+          // return pTag;
+          return `<p>${n}</p>`;
+        });
+        //console.log(pTags);
+        pTags.forEach((ptag) => {
+          paragraphTag.append(ptag);
+        });
+      };
+    </script> -->
+  </div>
+  <script src="./../../javascripts/index.js"></script>
+  <%- include("includes/footer") %>
+</div>

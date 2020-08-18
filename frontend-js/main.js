@@ -18,3 +18,5 @@ cartButtons[i].addEventListener('click',function(e){
         })
     })
 }
+
+ 
